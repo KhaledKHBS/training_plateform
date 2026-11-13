@@ -1,0 +1,9 @@
+{% extends 'courses/base.html' %}
+{% block title %}À propos{% endblock %}
+{% block content %}
+<h1>{{ page_title|default:"À propos" }}</h1>
+<div class="about-card">
+  <p>{{ description }}</p>
+  <p>Formateur : <span class="trainer">{{ trainer }}</span></p>
+</div>
+{% endblock %}

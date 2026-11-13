@@ -1,0 +1,31 @@
+{% extends "courses/base.html" %}
+{% load course_extras %}
+{% block title %}Catalogue{% endblock %}
+{% block content %}
+<h1>Catalogue</h1>
+<div class="course-grid">
+{% for course in courses %}
+  <article class="course-card">
+    <h2>{{ course.title }}</h2>
+    <p class="instructor">{{ course.instructor.name|default:"Sans formateur" }}</p>
+    <!-- <p class="duration">{{ course.duration }} heures</p> -->
+   <!-- <p> {{ course.duration|categorie_duree }}</p> -->
+    <span class="price">{{ course.price|currency_tnd }}</span>
+  </article>
+{% empty %}
+  <p class="empty">Aucune formation</p>
+{% endfor %}
+</div>
+
+{% if is_paginated %}
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a class="btn" href="?page={{ page_obj.previous_page_number }}">← Précédent</a>
+  {% endif %}
+  <span>Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}
+    <a class="btn" href="?page={{ page_obj.next_page_number }}">Suivant →</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

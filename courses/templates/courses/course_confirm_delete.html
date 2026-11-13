@@ -1,0 +1,16 @@
+{% extends "courses/base.html" %}
+{% block title %}Supprimer une formation{% endblock %}
+{% block content %}
+<h1>Supprimer une formation</h1>
+
+<form method="post" class="form-card">
+  {% csrf_token %}
+  <p>Voulez-vous vraiment supprimer la formation <strong>« {{ object.title }} »</strong> ?</p>
+  <p class="help">Cette action est définitive.</p>
+
+  <div class="form-actions">
+    <a href="{% url 'course_list' %}" class="btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,7 @@
+# Fichier : .python-version
+3.11.9
+
+# Dans le terminal Windows, vérifier :
+python --version
+
+# Ne pas écrire "python 3.11" dans le fichier.

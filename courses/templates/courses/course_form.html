@@ -1,0 +1,31 @@
+{% extends "courses/base.html" %}
+{% block title %}{% if object %}Modifier{% else %}Ajouter{% endif %} une formation{% endblock %}
+{% block content %}
+<h1>{% if object %}Modifier « {{ object.title }} »{% else %}Ajouter une formation{% endif %}</h1>
+
+<form method="post" class="form-card" novalidate>
+  {% csrf_token %}
+
+  {% if form.non_field_errors %}
+    <div class="form-alert">{{ form.non_field_errors }}</div>
+  {% endif %}
+
+  {% for field in form %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+      <label for="{{ field.id_for_label }}">
+        {{ field.label }}{% if field.field.required %} <span class="required">*</span>{% endif %}
+      </label>
+      {{ field }}
+      {% if field.help_text %}<small class="help">{{ field.help_text }}</small>{% endif %}
+      {% for error in field.errors %}
+        <small class="error">{{ error }}</small>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+  <div class="form-actions">
+    <a href="{% url 'course_list' %}" class="btn-secondary">Annuler</a>
+    <button type="submit" class="btn">Enregistrer</button>
+  </div>
+</form>
+{% endblock %}

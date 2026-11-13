@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Training Platform{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'courses/styles.css' %}">
+</head>
+<body>
+  <header>
+    <a class="brand" href="{% url 'course_list' %}">🎓 Training Platform</a>
+    <nav>
+      <a href="{% url 'course_list' %}">Formations</a>
+      <a href="{% url 'course_catalog' %}">Catalogue</a>
+      <a href="{% url 'course_about' %}">À propos</a>
+      <a href="{% url 'course_create' %}">Ajouter une formation</a>
+      <a href="{% url 'course_document_create_cbv' %}">Ajouter un document</a>
+      {% if user.is_authenticated %}
+      <p>Connecté : {{ user.username }}</p>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+      <button type="submit">Se déconnecter</button>
+      </form>
+      {% else %}
+      <a href="{% url 'login' %}">Connexion</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>© Training Platform — Formations en développement web</footer>
+</body>
+</html>
