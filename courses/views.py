@@ -32,7 +32,6 @@ class CourseupdateView(UpdateView):
     permission_required = "courses.change_course"
     login_url = "/admin/login/"  # provisoire
 
-@permission_required("courses.add_course",raise_exception=True)
 def course_create(request):
     if request.method == "POST":
         form = CourseForm(request.POST)
