@@ -123,17 +123,26 @@ WSGI_APPLICATION = 'training_platform.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "training_db",
-        "USER": "postgres",
-        "PASSWORD": "NewPassword123!",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+if os.getenv("DJANGO_ENV") == "production":
+    # Base PostgreSQL sur Render
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            ssl_require=True
+        )
     }
-}
-
+else:
+    # Base PostgreSQL locale
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "training_db",
+            "USER": "postgres",
+            "PASSWORD": os.getenv("LOCAL_DB_PASSWORD", ""),
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
+        }
+    }
 
 
 # Password validation
