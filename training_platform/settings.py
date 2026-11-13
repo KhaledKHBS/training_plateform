@@ -46,9 +46,13 @@ LOGOUT_REDIRECT_URL = "/courses/"
 SECRET_KEY = 'django-insecure-=h+q=t%_p6$l3c3h+1avfu4o*w%-yzc-ate0suc2x1k3+cugyx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "training-plateform.onrender.com",
+]
 
 
 # Application definition
